@@ -86,7 +86,7 @@ int main() {
     mybuf.sem_num = 0;
     
     if (semop(semid , &mybuf , 1) < 0) {
-        printf("Can`t wait for condition\n");
+        printf("Can`t wait for condition1\n");
         exit(-1);
     }
     
@@ -95,7 +95,7 @@ int main() {
     mybuf.sem_num = 1;
 	
     if (semop(semid , &mybuf , 1) < 0) {
-        printf("Can`t wait for condition\n");
+        printf("Can`t wait for condition2\n");
         exit(-1);
     }
     
@@ -104,12 +104,21 @@ int main() {
     mybuf.sem_num = 1;
     
     if (semop(semid , &mybuf , 1) < 0) {
-        printf("Can`t wait for condition\n");
+        printf("Can`t wait for condition3\n");
         exit(-1);
     }
     
     printf("Result is %d\n", array[1]);
 	
+    mybuf.sem_op = 1;
+    mybuf.sem_flg = 0;
+    mybuf.sem_num = 0;
+    
+    if (semop(semid , &mybuf , 1) < 0) {
+        printf("Can`t wait for condition4\n");
+        exit(-1);
+    }
+    
 	/*
 	Удаляем разделяемую память из адресного пространства текущего
 	процесса

@@ -75,6 +75,15 @@ int main()
         exit(-1);
     }
 	
+    mybuf.sem_op = -1;
+    mybuf.sem_flg = 0;
+    mybuf.sem_num = 0;
+
+    if (semop(semid , &mybuf , 1) < 0) {
+        printf("Can`t wait for condition\n");
+        exit(-1);
+    }
+    
     printf("Now you will find the result in the first process\n");
 	
 	if(shmdt(array) < 0){
